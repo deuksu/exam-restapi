@@ -59,7 +59,11 @@ public class AccoutsController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public @ResponseBody Account find(@PathVariable(value="id") int id) {
 		LOG.info("variable id = ", id);
-		return accountMapper.findOne(id);
+		Account account = accountMapper.findOne(id);
+		if (account == null) {
+			throw new RuntimeException("데이타가 없습니다.");
+		}
+		return account;
 	}
 	
 }
